@@ -1,12 +1,28 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import '@uiw/react-md-editor/markdown-editor.css'
+import '@uiw/react-markdown-preview/markdown.css'
 import {
   Memo,
   MemoFormData,
   MEMO_CATEGORIES,
   DEFAULT_CATEGORIES,
 } from '@/types/memo'
+
+// MDEditor를 동적으로 임포트 (SSR 이슈 방지)
+const MDEditor = dynamic(
+  () => import('@uiw/react-md-editor'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[350px] border border-gray-300 rounded-lg flex items-center justify-center bg-gray-50">
+        <div className="text-gray-500">마크다운 편집기 로딩 중...</div>
+      </div>
+    )
+  }
+)
 
 interface MemoFormProps {
   isOpen: boolean
@@ -168,28 +184,30 @@ export default function MemoForm({
               </select>
             </div>
 
-            {/* 내용 */}
+            {/* 내용 - 마크다운 편집기 */}
             <div>
-              <label
-                htmlFor="content"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                내용 *
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                내용 * (마크다운 편집기)
               </label>
-              <textarea
-                id="content"
-                value={formData.content}
-                onChange={e =>
-                  setFormData(prev => ({
-                    ...prev,
-                    content: e.target.value,
-                  }))
-                }
-                className="placeholder-gray-400 text-gray-400 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
-                placeholder="메모 내용을 입력하세요"
-                rows={8}
-                required
-              />
+              <div className="markdown-editor-container">
+                <MDEditor
+                  value={formData.content}
+                  onChange={(value) =>
+                    setFormData(prev => ({
+                      ...prev,
+                      content: value || '',
+                    }))
+                  }
+                  preview="live"
+                  height={350}
+                  data-color-mode="light"
+                  hideToolbar={false}
+                  visibleDragBar={false}
+                  textareaProps={{
+                    placeholder: '메모 내용을 마크다운으로 작성하세요...\n\n예시:\n# 제목\n- 리스트 항목\n**굵은 글씨**\n`인라인 코드`\n\n> 인용구\n\n```javascript\n// 코드 블록\nconsole.log("Hello!");\n```'
+                  }}
+                />
+              </div>
             </div>
 
             {/* 태그 */}

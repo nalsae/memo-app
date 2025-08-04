@@ -39,3 +39,363 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* 마크다운 편집기 컨테이너 */
+.markdown-editor-container {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.markdown-editor-container:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 마크다운 편집기 스타일 개선 */
+.w-md-editor {
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.w-md-editor.w-md-editor-focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.w-md-editor-text-textarea,
+.w-md-editor-text {
+  color: #374151 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+.w-md-editor-text-textarea {
+  padding: 1rem !important;
+}
+
+.w-md-editor-text-textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* 툴바 스타일 */
+.w-md-editor-toolbar {
+  background-color: #f9fafb !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding: 0.5rem !important;
+}
+
+.w-md-editor-toolbar-item button {
+  color: #6b7280 !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem !important;
+  margin: 0 0.125rem !important;
+}
+
+.w-md-editor-toolbar-item button:hover {
+  color: #374151 !important;
+  background-color: #e5e7eb !important;
+}
+
+/* 프리뷰 영역 스타일 */
+.w-md-editor-preview {
+  background-color: #ffffff !important;
+  padding: 1rem !important;
+}
+
+/* 마크다운 프리뷰 스타일 */
+.wmde-markdown {
+  background-color: transparent !important;
+  color: inherit !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+}
+
+/* 제목 스타일 */
+.wmde-markdown h1,
+.wmde-markdown h2,
+.wmde-markdown h3,
+.wmde-markdown h4,
+.wmde-markdown h5,
+.wmde-markdown h6 {
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  color: #111827 !important;
+}
+
+.wmde-markdown h1 {
+  font-size: 1.5rem !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.wmde-markdown h2 {
+  font-size: 1.25rem !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.wmde-markdown h3 {
+  font-size: 1.125rem !important;
+}
+
+/* 문단 스타일 */
+.wmde-markdown p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.6 !important;
+}
+
+/* 리스트 스타일 - 불렛 포인트 표시 */
+.wmde-markdown ul,
+.wmde-markdown ol {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.wmde-markdown ul {
+  list-style-type: disc !important;
+}
+
+.wmde-markdown ol {
+  list-style-type: decimal !important;
+}
+
+.wmde-markdown li {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+  line-height: 1.6 !important;
+}
+
+/* 중첩된 리스트 */
+.wmde-markdown ul ul {
+  list-style-type: circle !important;
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.wmde-markdown ul ul ul {
+  list-style-type: square !important;
+}
+
+/* 코드 스타일 */
+.wmde-markdown code {
+  background-color: #f3f4f6 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875em !important;
+  color: #dc2626 !important;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;
+}
+
+.wmde-markdown pre {
+  background-color: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+  overflow-x: auto !important;
+}
+
+.wmde-markdown pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: #374151 !important;
+  font-size: 0.875rem !important;
+}
+
+/* 인용구 스타일 */
+.wmde-markdown blockquote {
+  border-left: 4px solid #d1d5db !important;
+  padding-left: 1rem !important;
+  margin: 1rem 0 !important;
+  color: #6b7280 !important;
+  background-color: #f9fafb !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
+.wmde-markdown blockquote p {
+  margin: 0 !important;
+}
+
+/* 테이블 스타일 */
+.wmde-markdown table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1rem 0 !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.375rem !important;
+  overflow: hidden !important;
+}
+
+.wmde-markdown th,
+.wmde-markdown td {
+  padding: 0.75rem !important;
+  text-align: left !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.wmde-markdown th {
+  background-color: #f9fafb !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+}
+
+.wmde-markdown tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* 체크박스 스타일 */
+.wmde-markdown input[type="checkbox"] {
+  margin-right: 0.5rem !important;
+  transform: scale(1.1) !important;
+}
+
+/* 구분선 스타일 */
+.wmde-markdown hr {
+  border: none !important;
+  border-top: 2px solid #e5e7eb !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* 강조 스타일 */
+.wmde-markdown strong,
+.wmde-markdown b {
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+
+.wmde-markdown em,
+.wmde-markdown i {
+  font-style: italic !important;
+  color: #374151 !important;
+}
+
+/* 링크 스타일 */
+.wmde-markdown a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+.wmde-markdown a:hover {
+  color: #1d4ed8 !important;
+}
+
+/* 메모 아이템 내 마크다운 미리보기 스타일 */
+.memo-item-preview .wmde-markdown {
+  font-size: 0.875rem !important;
+  line-height: 1.4 !important;
+}
+
+/* 메모 아이템 제목 스타일 */
+.memo-item-preview .wmde-markdown h1,
+.memo-item-preview .wmde-markdown h2,
+.memo-item-preview .wmde-markdown h3,
+.memo-item-preview .wmde-markdown h4,
+.memo-item-preview .wmde-markdown h5,
+.memo-item-preview .wmde-markdown h6 {
+  font-size: 1rem !important;
+  margin: 0.25rem 0 0.125rem 0 !important;
+  font-weight: 600 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.memo-item-preview .wmde-markdown h1 {
+  font-size: 1.1rem !important;
+}
+
+.memo-item-preview .wmde-markdown h2 {
+  font-size: 1.05rem !important;
+}
+
+/* 메모 아이템 문단 스타일 */
+.memo-item-preview .wmde-markdown p {
+  margin: 0.125rem 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* 메모 아이템 리스트 스타일 */
+.memo-item-preview .wmde-markdown ul,
+.memo-item-preview .wmde-markdown ol {
+  margin: 0.25rem 0 !important;
+  padding-left: 1rem !important;
+}
+
+.memo-item-preview .wmde-markdown ul {
+  list-style-type: disc !important;
+}
+
+.memo-item-preview .wmde-markdown ol {
+  list-style-type: decimal !important;
+}
+
+.memo-item-preview .wmde-markdown li {
+  margin: 0.125rem 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* 메모 아이템 코드 스타일 */
+.memo-item-preview .wmde-markdown code {
+  font-size: 0.75rem !important;
+  background-color: #f3f4f6 !important;
+  padding: 0.0625rem 0.125rem !important;
+  border-radius: 0.125rem !important;
+}
+
+.memo-item-preview .wmde-markdown pre {
+  margin: 0.25rem 0 !important;
+  font-size: 0.75rem !important;
+  padding: 0.5rem !important;
+  background-color: #f9fafb !important;
+  border-radius: 0.25rem !important;
+}
+
+.memo-item-preview .wmde-markdown pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+/* 메모 아이템 인용구 스타일 */
+.memo-item-preview .wmde-markdown blockquote {
+  margin: 0.25rem 0 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-left: 2px solid #d1d5db !important;
+  background-color: transparent !important;
+  color: #6b7280 !important;
+}
+
+/* 메모 아이템 테이블 스타일 */
+.memo-item-preview .wmde-markdown table {
+  font-size: 0.75rem !important;
+  margin: 0.25rem 0 !important;
+}
+
+.memo-item-preview .wmde-markdown th,
+.memo-item-preview .wmde-markdown td {
+  padding: 0.25rem 0.5rem !important;
+}
+
+/* 메모 아이템 강조 스타일 */
+.memo-item-preview .wmde-markdown strong,
+.memo-item-preview .wmde-markdown b {
+  font-weight: 600 !important;
+}
+
+.memo-item-preview .wmde-markdown em,
+.memo-item-preview .wmde-markdown i {
+  font-style: italic !important;
+}
+
+/* 메모 아이템에서 체크박스 스타일 */
+.memo-item-preview .wmde-markdown input[type="checkbox"] {
+  margin-right: 0.25rem !important;
+  transform: scale(0.9) !important;
+}
