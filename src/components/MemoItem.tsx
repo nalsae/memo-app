@@ -1,14 +1,32 @@
 'use client'
 
 import { Memo, MEMO_CATEGORIES } from '@/types/memo'
+import dynamic from 'next/dynamic'
+import '@uiw/react-markdown-preview/markdown.css'
+
+// 마크다운 프리뷰 컴포넌트를 동적으로 임포트 (SSR 이슈 방지)
+const MarkdownPreview = dynamic(
+  () => import('@uiw/react-markdown-preview'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse">
+        <div className="h-3 bg-gray-200 rounded mb-1"></div>
+        <div className="h-3 bg-gray-200 rounded mb-1 w-4/5"></div>
+        <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+      </div>
+    )
+  }
+)
 
 interface MemoItemProps {
   memo: Memo
   onEdit: (memo: Memo) => void
   onDelete: (id: string) => void
+  onView: (memo: Memo) => void
 }
 
-export default function MemoItem({ memo, onEdit, onDelete }: MemoItemProps) {
+export default function MemoItem({ memo, onEdit, onDelete, onView }: MemoItemProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('ko-KR', {
@@ -32,7 +50,10 @@ export default function MemoItem({ memo, onEdit, onDelete }: MemoItemProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
+    <div 
+      className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+      onClick={() => onView(memo)}
+    >
       {/* 헤더 */}
       <div className="flex justify-between items-start mb-3">
         <div className="flex-1">
@@ -55,7 +76,10 @@ export default function MemoItem({ memo, onEdit, onDelete }: MemoItemProps) {
         {/* 액션 버튼 */}
         <div className="flex gap-2 ml-4">
           <button
-            onClick={() => onEdit(memo)}
+            onClick={(e) => {
+              e.stopPropagation()
+              onEdit(memo)
+            }}
             className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
             title="편집"
           >
@@ -74,7 +98,8 @@ export default function MemoItem({ memo, onEdit, onDelete }: MemoItemProps) {
             </svg>
           </button>
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation()
               if (window.confirm('정말로 이 메모를 삭제하시겠습니까?')) {
                 onDelete(memo.id)
               }
@@ -99,11 +124,19 @@ export default function MemoItem({ memo, onEdit, onDelete }: MemoItemProps) {
         </div>
       </div>
 
-      {/* 내용 */}
+      {/* 내용 - 마크다운 미리보기 */}
       <div className="mb-4">
-        <p className="text-gray-700 text-sm leading-relaxed line-clamp-3">
-          {memo.content}
-        </p>
+        <div className="text-gray-700 text-sm leading-relaxed line-clamp-3 overflow-hidden memo-item-preview">
+          <MarkdownPreview 
+            source={memo.content}
+            style={{ 
+              backgroundColor: 'transparent',
+              fontSize: '0.875rem',
+              lineHeight: '1.25rem'
+            }}
+            data-color-mode="light"
+          />
+        </div>
       </div>
 
       {/* 태그 */}
